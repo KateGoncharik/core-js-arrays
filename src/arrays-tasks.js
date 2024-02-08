@@ -224,8 +224,9 @@ function getTail(arr, n) {
  *    doubleArray([0, 1, 2, 3, 4, 5]) => [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
  *    doubleArray([]) => []
  */
-function doubleArray(/* arr */) {
-  throw new Error('Not implemented');
+function doubleArray(arr) {
+  const copy = arr.slice(0);
+  return arr.concat(copy);
 }
 
 /**
@@ -239,8 +240,19 @@ function doubleArray(/* arr */) {
  *    toStringList([1, 2, 3, 4, 5]) => '1,2,3,4,5'
  *    toStringList(['rock', 'paper', 'scissors']) => 'rock,paper,scissors'
  */
-function toStringList(/* arr */) {
-  throw new Error('Not implemented');
+function toStringList(arr) {
+  let resultString = '';
+  arr.map((element, index) => {
+    if (index === arr.length - 1) {
+      resultString += `${element}`;
+
+      return 0;
+    }
+    resultString += `${element},`;
+
+    return 0;
+  });
+  return resultString;
 }
 
 /**
@@ -255,8 +267,13 @@ function toStringList(/* arr */) {
  *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
  *   distinct([]) => []
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const set = new Set();
+  arr.map((element) => {
+    set.add(element);
+    return 0;
+  });
+  return [...set];
 }
 
 /**

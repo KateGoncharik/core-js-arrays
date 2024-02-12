@@ -37,11 +37,20 @@ function getIntervalArray(/* start, end */) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  // const result = [];
-  // result.map((element, index) => element + arr2[index]);
-  // return result;
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  if (arr1.length === arr2.length) {
+    return arr1.map((element, index) => {
+      return element + arr2[index];
+    });
+  }
+  const biggest = arr1.length > arr2.length ? arr1 : arr2;
+  const smallest = arr1.length < arr2.length ? arr1 : arr2;
+  return biggest.map((element, index) => {
+    if (!smallest[index]) {
+      return element;
+    }
+    return element + smallest[index];
+  });
 }
 
 /**
@@ -75,14 +84,14 @@ function findElement(arr, value) {
  *    findAllOccurrences([ true, 0, 1, 'true' ], true) => 1
  */
 function findAllOccurrences(arr, item) {
-  let occurances = 0;
+  let occurrences = 0;
   arr.map((element) => {
     if (element === item) {
-      occurances += 1;
+      occurrences += 1;
     }
     return 0;
   });
-  return occurances;
+  return occurrences;
 }
 
 /**
@@ -97,8 +106,9 @@ function findAllOccurrences(arr, item) {
  *    removeFalsyValues([ 1, 2, 3, 4, 5, 'false' ]) => [ 1, 2, 3, 4, 5, 'false' ]
  *    removeFalsyValues([ false, 0, NaN, '', undefined ]) => [ ]
  */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
+function removeFalsyValues(arr) {
+  const falsyValues = ['', null, false, 0, NaN, undefined];
+  return arr.filter((element) => !falsyValues.includes(element));
 }
 
 /**
@@ -178,8 +188,8 @@ function isValueEqualsIndex(arr) {
  *    insertItem([ 1, 3, 4, 5 ], 2, 1)  => [ 1, 2, 3, 4, 5 ]
  *    insertItem([ 1, 'b', 'c'], 'x', 0) => [ 'x', 1, 'b', 'c' ]
  */
-function insertItem(/* arr, item, index */) {
-  throw new Error('Not implemented');
+function insertItem(arr, item, index) {
+  return arr.splice(index, 0, item);
 }
 
 /**
@@ -577,8 +587,24 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  if (!arr.length) {
+    return [];
+  }
+  if (arr.length === 1) {
+    return arr;
+  }
+  if (arr.length % 2 > 0) {
+    const centerElement = Math.floor(arr.length / 2);
+    const firstHalf = arr.slice(0, centerElement);
+    const secondHalf = arr.slice(centerElement + 1);
+    return [...secondHalf, arr[centerElement], ...firstHalf];
+  }
+  const middle = arr.length / 2;
+
+  const firstHalf = arr.slice(0, middle);
+  const secondHalf = arr.slice(middle);
+  return [...secondHalf, ...firstHalf];
 }
 
 module.exports = {
